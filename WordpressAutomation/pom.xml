@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>com.shakti.WordPressSelenium</artifactId>
+        <groupId>com.shakti.WordPressSelenium</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>WordpressAutomation</name>
+    <description>This has logic code to test the Wordpress site.</description>
+
+    <artifactId>com.shakti.WordPressSelenium.WordpressAutomation</artifactId>
+
+    <properties>
+        <ext-jar>src\main\resources\External_Jars</ext-jar>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.48.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j-1.2.17</groupId>
+            <artifactId>log4j-1.2.17</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${basedir}\${ext-jar}\log4j-1.2.17.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+</project>
