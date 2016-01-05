@@ -6,13 +6,18 @@ import org.testng.annotations.BeforeClass;
 
 import com.shakti.seleniumFrame.Pages.LoginPage;
 import com.shakti.seleniumFrame.seleniumDriver.Driver;
+import org.testng.annotations.BeforeSuite;
 
 public class WordpressTest {
+
+	@BeforeSuite
+	public static void initSuite(){
+		Log.Initialize();
+	}
   
 	@BeforeClass
-	public static void init(){
+	public static void initTestClass(){
 
-		Log.logInitialize();
 		Log.info("Initializing the Browser");
 		Driver.Initialize();
 
@@ -24,7 +29,7 @@ public class WordpressTest {
 	}
 	
 	@AfterClass
-	public static void cleanup(){
+	public static void cleanupTestClass(){
 		Log.info("Closing the Browser. Bye!!");
 		Driver.Close();
 	}

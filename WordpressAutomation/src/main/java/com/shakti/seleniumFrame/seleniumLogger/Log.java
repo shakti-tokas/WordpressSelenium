@@ -13,7 +13,7 @@ public class Log {
     private static Logger Log;
     private static final String log4jConfigPath = "E:\\SeleniumProjects\\WordPressSelenium\\WordpressAutomation\\src\\main\\resources\\XML_Configs\\log4j.xml";
 
-    public static void logInitialize() {
+    public static void Initialize() {
         Log = Logger.getLogger(Log.class.getName());
         DOMConfigurator.configure(log4jConfigPath);
     }

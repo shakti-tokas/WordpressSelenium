@@ -3,13 +3,17 @@
   
 <suite name="ReleaseSuite" verbose="1" >
   <test name="Smoke Tests" >
-    <!--
-    <packages>
-    	<package name="com.shakti.TNGTests.smokeTests"/>
-    </packages>
-    -->
+
+      <parameter name="titlePost" value="Smoke test Page"/>
+
+      <packages>
+          <package name="com.shakti.TNGTests.smokeTests"/>
+      </packages>
+
+      <!--
       <classes>
           <class name="com.shakti.TNGTests.smokeTests.LoginTests"/>
       </classes>
+      -->
   </test>
 </suite>

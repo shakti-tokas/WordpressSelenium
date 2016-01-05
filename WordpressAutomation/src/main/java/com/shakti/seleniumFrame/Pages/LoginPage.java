@@ -23,7 +23,8 @@ public class LoginPage {
 		Log.info("Navigated to WordPress Login Page");
 		
 		//Wait for the element to be visible on page
-		WebDriverWait wait = new WebDriverWait(Driver.Instance,5); 		
+		WebDriverWait wait = new WebDriverWait(Driver.Instance,5);
+		Log.info("Waiting until items start displaying.");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(userNameTextBox));
 	}
 
