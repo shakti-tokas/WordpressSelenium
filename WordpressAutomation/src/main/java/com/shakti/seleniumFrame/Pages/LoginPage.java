@@ -16,10 +16,12 @@ public class LoginPage {
     public static By userPasswordTextBox = By.id("user_pass");
     public static By submitButton = By.id("wp-submit");
 
+	public static final String LoginPageURL = "wp-login.php";
+
 	public static void GoTo() {
 		// TODO Auto-generated method stub
 		// To make driver instance Global we created class Driver
-		Driver.Instance.navigate().to(Driver.getBaseAddress() + "wp-login.php");
+		Driver.Instance.navigate().to(Driver.getBaseAddress() + LoginPageURL);
 		Log.info("Navigated to WordPress Login Page");
 		
 		//Wait for the element to be visible on page

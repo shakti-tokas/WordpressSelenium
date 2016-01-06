@@ -11,9 +11,9 @@ import com.shakti.seleniumFrame.Pages.ListPostsPage;
 import com.shakti.seleniumFrame.Pages.ListPostsPage.PostType;
 
 public class PageTests extends WordpressTest {
-	
-	@Test
+
     @Parameters("titlePost")
+	@Test
 	public void User_Can_Edit_Post(String titlePost) {
 
         Log.startTestCase("User_Can_Edit_Post");

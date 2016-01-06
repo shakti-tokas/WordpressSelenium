@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import com.shakti.seleniumFrame.Pages.LoginPage;
 import com.shakti.seleniumFrame.seleniumDriver.Driver;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 public class WordpressTest {
 
@@ -14,12 +15,15 @@ public class WordpressTest {
 	public static void initSuite(){
 		Log.Initialize();
 	}
-  
-	@BeforeClass
-	public static void initTestClass(){
 
-		Log.info("Initializing the Browser");
-		Driver.Initialize();
+    @Parameters({"wordPressURL","browser"})
+	@BeforeClass
+	public static void initTestClass(String wordPressURL, String browser){
+
+        Log.info("Initializing the "+ browser +" Browser");
+        InitializeDriver(browser);
+
+		Driver.setBaseAddress(wordPressURL);
 
 		Log.info("Navigating to Login Page");
 		LoginPage.GoTo();
@@ -33,5 +37,31 @@ public class WordpressTest {
 		Log.info("Closing the Browser. Bye!!");
 		Driver.Close();
 	}
+
+    public static void InitializeDriver(String browser){
+
+        try {
+            switch (browser) {
+
+                case "Firefox":
+                    Driver.Initialize(Driver.BrowserType.Firefox);
+                    break;
+
+                case "Chrome":
+                    Driver.Initialize(Driver.BrowserType.Chrome);
+                    break;
+
+                case "Edge":
+                    Driver.Initialize(Driver.BrowserType.Edge);
+                    break;
+
+                default:
+                    Log.fatal("No such Browser is supported by this application.");
+                    throw new IllegalArgumentException();
+            }
+        }catch (Exception e){
+            Log.fatal(e.getMessage());
+        }
+    }
 
 }

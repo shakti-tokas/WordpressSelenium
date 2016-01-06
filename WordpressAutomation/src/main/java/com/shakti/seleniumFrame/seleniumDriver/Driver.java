@@ -1,13 +1,13 @@
 package com.shakti.seleniumFrame.seleniumDriver;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import com.shakti.seleniumFrame.Browsers.GoogleChrome;
+import com.shakti.seleniumFrame.Browsers.MicrosoftEdge;
+import com.shakti.seleniumFrame.Browsers.MozillaFirefox;
 import com.shakti.seleniumFrame.seleniumLogger.Log;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-//import org.openqa.selenium.firefox.internal.ProfilesIni;
+
 
 public class Driver {
 	
@@ -15,7 +15,7 @@ public class Driver {
 	public static String BaseAddress;
 	
 	public static String getBaseAddress() {
-		return "http://localhost:51396/";
+		return BaseAddress;
 	}
 
 	public static void setBaseAddress(String baseAddress) {
@@ -29,26 +29,35 @@ public class Driver {
 	public static void setInstance(WebDriver instance) {
 		Instance = instance;
 	}
-	
-	public static void Initialize(){
 
-		Log.info("Initializing the Driver");
-		FirefoxProfile instanceProfile = getProfile();
-		//instanceProfile.setPreference("browser.startup.homepage", "about:home");
-		Instance = new FirefoxDriver(instanceProfile);
-		Log.info("Profile Fetched");
-		turnOnWait();
-		Instance.manage().window().maximize();
-	}
-	
-	public static FirefoxProfile getProfile() {
-		// TODO Auto-generated method stub
-		//ProfilesIni allProfiles = new ProfilesIni();		
-		//return allProfiles.getProfile("testNGUser");
-		Log.info("Fetching Firefox Profile");
-		String profilePath = "C:\\Users\\stokas\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\gq9ow771.testNGUser";
-		return new FirefoxProfile(new File(profilePath));
-	}
+    public enum BrowserType{
+        Firefox, Chrome, Edge
+    }
+
+    public static void Initialize(BrowserType browserType) {
+
+        switch (browserType){
+
+            case Firefox:
+                Instance = MozillaFirefox.InitializeFirefox();
+                turnOnWait();
+                BrowserMaximize();
+                break;
+
+            case Chrome:
+                Instance = GoogleChrome.InitializeChrome();
+                turnOnWait();
+                BrowserMaximize();
+                break;
+
+            case Edge:
+                Instance = MicrosoftEdge.InitializeEdge();
+                turnOnWait();
+                //BrowserMaximize();
+                //In current build browser maximize is not supported by Microsoft Egde.
+                break;
+        }
+    }
 
 	public static void Close() {
 		// TODO Auto-generated method stub
@@ -68,4 +77,8 @@ public class Driver {
 		Log.info("Driver Time-Out turned OFF");
 	}
 
+    public static void BrowserMaximize() {
+        // TODO Auto-generated method stub
+        Instance.manage().window().maximize();
+    }
 }
