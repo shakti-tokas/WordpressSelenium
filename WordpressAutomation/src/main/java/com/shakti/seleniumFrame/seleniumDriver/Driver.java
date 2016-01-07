@@ -2,6 +2,7 @@ package com.shakti.seleniumFrame.seleniumDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import com.shakti.seleniumFrame.Browsers.BrowserType;
 import com.shakti.seleniumFrame.Browsers.GoogleChrome;
 import com.shakti.seleniumFrame.Browsers.MicrosoftEdge;
 import com.shakti.seleniumFrame.Browsers.MozillaFirefox;
@@ -29,10 +30,6 @@ public class Driver {
 	public static void setInstance(WebDriver instance) {
 		Instance = instance;
 	}
-
-    public enum BrowserType{
-        Firefox, Chrome, Edge
-    }
 
     public static void Initialize(BrowserType browserType) {
 

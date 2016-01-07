@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
 
 import com.shakti.seleniumFrame.seleniumDriver.Driver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NewPostPage {
     public static By TitleBox = By.id("title");
@@ -33,7 +35,7 @@ public class NewPostPage {
             Driver.Instance.findElement(ViewPostLink).click();
         }catch (Exception e) {
             Log.error(e.toString());
-            Driver.Close();
+            //Driver.Close();
         }
     }
 
@@ -53,32 +55,34 @@ public class NewPostPage {
 		public void Publish(){
 			//
 			try{
-			//Find title text box and enter title
-            Log.info("Typing title for new post.");
-			Driver.Instance.findElement(TitleBox).sendKeys(title);
+                //Find title text box and enter title
+                Log.info("Typing title for new post.");
+                Driver.Instance.findElement(TitleBox).sendKeys(title);
 
-			//Switch to frame with text field to write post
-			Driver.Instance.switchTo().frame(PostBodyFrame);
-            Log.info("Typing Body for new post.");
-			Driver.Instance.switchTo().activeElement().sendKeys(body);
-			Driver.Instance.switchTo().defaultContent(); //Control back to main title page
-            Driver.Instance.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+                //Switch to frame with text field to write post
+                Driver.Instance.switchTo().frame(PostBodyFrame);
+                Log.info("Typing Body for new post.");
+                Driver.Instance.switchTo().activeElement().sendKeys(body);
+                Driver.Instance.switchTo().defaultContent(); //Control back to main title page
 
-			//Publish the post
-            Log.info("Publishing new post.");
-			Driver.Instance.findElement(PublishButton).click();
-			Driver.Instance.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+                //Publish the post
+                Log.info("Publishing new post.");
+                Driver.Instance.findElement(PublishButton).submit();
+
+                WebDriverWait wait = new WebDriverWait(Driver.Instance,15);
+                Log.info("Waiting until post is published.");
+                wait.until(ExpectedConditions.visibilityOfElementLocated(ViewPostLink));
 		}
 			catch (UnhandledAlertException f) {
 		        Alert alert = Driver.Instance.switchTo().alert();
 		        String alertText = alert.getText();
                 Log.error("Alert data: " + alertText);
 		        alert.accept();
-		        Driver.Close();
+		        //Driver.Close();
 		}
 			catch (Exception e) {
 				Log.error(e.toString());
-				Driver.Close();
+				//Driver.Close();
 			}
 
 	    }

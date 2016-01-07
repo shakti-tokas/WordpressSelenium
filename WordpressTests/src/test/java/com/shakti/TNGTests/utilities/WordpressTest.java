@@ -1,5 +1,6 @@
 package com.shakti.TNGTests.utilities;
 
+import com.shakti.seleniumFrame.Browsers.BrowserType;
 import com.shakti.seleniumFrame.seleniumLogger.Log;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,9 +17,9 @@ public class WordpressTest {
 		Log.Initialize();
 	}
 
-    @Parameters({"wordPressURL","browser"})
+    @Parameters({"wordPressURL","browser","credentials"})
 	@BeforeClass
-	public static void initTestClass(String wordPressURL, String browser){
+	public static void initTestClass(String wordPressURL, String browser, String credentials){
 
         Log.info("Initializing the "+ browser +" Browser");
         InitializeDriver(browser);
@@ -29,12 +30,14 @@ public class WordpressTest {
 		LoginPage.GoTo();
 
 		Log.info("Start Entering UserName and Password");
-		LoginPage.LoginAs("shaz1985").WithPassword("13jxesD7&RayJpiHN1").Login();
+		//LoginPage.LoginAs("shaz1985").WithPassword("13jxesD7&RayJpiHN1").Login();
+        LoginPage.LoginAs(credentials.split("\\#")[0]).WithPassword(credentials.split("\\#")[1]).Login();
 	}
-	
+
+    @Parameters("browser")
 	@AfterClass
-	public static void cleanupTestClass(){
-		Log.info("Closing the Browser. Bye!!");
+	public static void cleanupTestClass(String browser){
+		Log.info("Closing the "+ browser +" Browser. Bye!!");
 		Driver.Close();
 	}
 
@@ -44,15 +47,15 @@ public class WordpressTest {
             switch (browser) {
 
                 case "Firefox":
-                    Driver.Initialize(Driver.BrowserType.Firefox);
+                    Driver.Initialize(BrowserType.Firefox);
                     break;
 
                 case "Chrome":
-                    Driver.Initialize(Driver.BrowserType.Chrome);
+                    Driver.Initialize(BrowserType.Chrome);
                     break;
 
                 case "Edge":
-                    Driver.Initialize(Driver.BrowserType.Edge);
+                    Driver.Initialize(BrowserType.Edge);
                     break;
 
                 default:
